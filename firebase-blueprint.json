@@ -1,0 +1,39 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Employee or Intern profile",
+      "type": "object",
+      "properties": {
+        "fullName": { "type": "string", "description": "User's full name" },
+        "email": { "type": "string", "format": "email", "description": "User's email" },
+        "phoneNumber": { "type": "string", "description": "User's phone number" },
+        "role": { "type": "string", "enum": ["employee", "intern"], "description": "User's role" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Account creation date" }
+      },
+      "required": ["fullName", "email", "phoneNumber", "role", "createdAt"]
+    },
+    "Message": {
+      "title": "Message",
+      "description": "Chat message",
+      "type": "object",
+      "properties": {
+        "text": { "type": "string", "description": "Message content" },
+        "senderId": { "type": "string", "description": "UID of the sender" },
+        "senderName": { "type": "string", "description": "Name of the sender to display" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Message timestamp" }
+      },
+      "required": ["text", "senderId", "senderName", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/messages/{messageId}": {
+      "schema": "Message",
+      "description": "Global chat messages for the company"
+    }
+  }
+}
